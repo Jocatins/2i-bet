@@ -7,11 +7,9 @@ app.use(express.json());
 
 const events = [];
 
-// Endpoint to add a new event
 app.post("/events", (req, res) => {
 	const { eventName, eventDate, bettingOptions } = req.body;
 
-	// Server-side validation
 	if (new Date(eventDate) <= new Date()) {
 		return res.status(400).json({ error: "Event date must be in the future." });
 	}
@@ -34,7 +32,6 @@ app.post("/events", (req, res) => {
 	res.status(201).json({ message: "Event created successfully." });
 });
 
-// Endpoint to retrieve events
 app.get("/events", (req, res) => {
 	res.json(events);
 });
@@ -65,7 +62,7 @@ app.patch("/events/:eventName/options/:optionName/suspend", (req, res) => {
 	});
 });
 
-// DELETE route to clear all events (server-side only)
+// DELETE route (server-side only)
 app.delete("/events", (req, res) => {
 	// Clear the in-memory array
 	events.length = 0;
