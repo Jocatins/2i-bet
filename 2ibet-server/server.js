@@ -6,7 +6,6 @@ app.use(cors());
 app.use(express.json());
 
 const events = [];
-
 app.post("/events", (req, res) => {
 	const { eventName, eventDate, bettingOptions } = req.body;
 
